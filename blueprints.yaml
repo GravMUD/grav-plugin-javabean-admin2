@@ -1,0 +1,62 @@
+name: JavaBean for Admin2
+slug: grav-javabean-admin2
+type: plugin
+version: 0.1.0
+description: Free Admin2 theme presets — twelve cockpits, light/dark pairs, Andy switcher compatible.
+icon: mug-hot
+author:
+  name: FutureVision Labs · Team DC
+  email: chief@gravmud.site
+  url: https://gravmud.site
+homepage: https://github.com/GravMUD/grav-plugin-grav-javabean-admin2
+bugs: https://github.com/GravMUD/grav-plugin-grav-javabean-admin2/issues
+docs: https://github.com/GravMUD/grav-plugin-grav-javabean-admin2/blob/main/README.md
+keywords: grav, admin2, admin-next, theme, javabean, presets
+license: MIT
+compatibility:
+  grav: ['2.0']
+dependencies:
+  - { name: grav, version: '>=2.0.0' }
+  - { name: admin2, version: '>=1.0.0' }
+  - { name: api, version: '>=1.0.0' }
+form:
+  validation: loose
+  fields:
+    enabled:
+      type: toggle
+      label: JavaBean theming
+      highlight: 1
+      default: 1
+      options:
+        1: Enabled
+        0: Disabled
+      validate:
+        type: bool
+    active_preset:
+      type: javabean-preset-picker
+      label: Theme preset
+      default: javabean-classic
+    density:
+      type: select
+      label: Density
+      default: comfy
+      options:
+        compact: Compact
+        comfy: Comfy
+        spacious: Spacious
+    inject_menubar_links:
+      type: toggle
+      label: Inject menubar shortcuts
+      highlight: 1
+      default: 0
+      help: Merges optional header links into Admin2 menubarLinks — edit JavaBeanMenubarLinks::defaultLinks() to customize
+      options:
+        1: Enabled
+        0: Disabled
+      validate:
+        type: bool
+    custom_css:
+      type: textarea
+      label: Custom CSS
+      rows: 6
+      placeholder: '/* scoped overrides — optional */'

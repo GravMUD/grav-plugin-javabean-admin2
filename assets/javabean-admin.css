@@ -1,0 +1,10 @@
+/* JavaBean preset card picker — host page styles when shadow DOM unavailable */
+.javabean-preset-picker-fallback {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  gap: 0.75rem;
+}
+
+html.javabean-active {
+  transition: background-color 0.15s ease, color 0.15s ease;
+}

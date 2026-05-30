@@ -1,0 +1,24 @@
+enabled: true
+
+active_preset: javabean-classic
+
+inject_menubar_links: false
+
+styling:
+
+  accentHue: null
+
+  accentSaturation: null
+
+  usePresetAccent: true
+
+  density: comfy
+
+  fontFamily: null
+
+  usePresetFont: true
+
+  radius: default
+
+  customCss: ''
+

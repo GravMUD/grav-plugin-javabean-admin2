@@ -1,0 +1,43 @@
+title: JavaBean Themes
+form:
+  validation: loose
+  fields:
+    header_note:
+      type: section
+      title: Team DC cockpit paint
+      text: 'Free Admin2 theming by FutureVision Labs. Twelve presets, Andy light/dark compatible. More at gravmud.site / Mud Bazaar.'
+    tabs:
+      type: tabs
+      fields:
+        presets:
+          type: tab
+          title: Presets
+          fields:
+            enabled:
+              type: toggle
+              label: Enable JavaBean theming
+              highlight: 1
+              default: 1
+              options:
+                1: Enabled
+                0: Disabled
+            active_preset:
+              type: javabean-preset-picker
+              label: Theme preset
+              default: javabean-classic
+        advanced:
+          type: tab
+          title: Paint shop
+          fields:
+            styling:
+              type: javabean-advanced-styling
+              label: Advanced styling
+              default:
+                accentHue: null
+                accentSaturation: null
+                usePresetAccent: true
+                density: comfy
+                fontFamily: null
+                usePresetFont: true
+                radius: default
+                customCss: ''
