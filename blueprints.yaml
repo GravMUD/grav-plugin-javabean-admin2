@@ -46,10 +46,10 @@ form:
         spacious: Spacious
     inject_menubar_links:
       type: toggle
-      label: Inject menubar shortcuts
+      label: Inject Team DC header icons
       highlight: 1
-      default: 0
-      help: Merges optional header links into Admin2 menubarLinks — edit JavaBeanMenubarLinks::defaultLinks() to customize
+      default: 1
+      help: Adds EvvyTink, GetGRAV!, and Mud Bazaar shortcuts to the Admin2 top bar (live site URLs)
       options:
         1: Enabled
         0: Disabled

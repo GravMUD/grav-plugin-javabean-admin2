@@ -15,9 +15,26 @@ class JavaBeanMenubarLinks
     /** @return array<int, array<string, mixed>> */
     public static function defaultLinks(): array
     {
-        // Optional Admin2 header shortcuts — add your own { label, url, icon, external } entries.
-        // Kept empty in the public release; enable via inject_menubar_links in plugin settings.
-        return [];
+        return [
+            [
+                'label' => 'EvvyTink',
+                'url' => 'https://gravmud.site/mud-admin',
+                'icon' => 'fa-wand-magic-sparkles',
+                'external' => true,
+            ],
+            [
+                'label' => 'GetGRAV!',
+                'url' => 'https://goggrav.live',
+                'icon' => 'fa-rocket',
+                'external' => true,
+            ],
+            [
+                'label' => 'Mud Bazaar',
+                'url' => 'https://gravmud.site/marketplace',
+                'icon' => 'fa-store',
+                'external' => true,
+            ],
+        ];
     }
 
     public function mergeTeamDcLinks(Grav $grav): void

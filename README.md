@@ -43,9 +43,17 @@ Open **Admin2 → JavaBean** (sidebar) or **Settings → JavaBean Themes**.
 
 Presets include serif and monospace faces (Grav Cathedral, Midnight Ops, EvvyTink Terminal, etc.). Fonts load from Google Fonts when selected.
 
-### Optional menubar shortcuts
+### Team DC header shortcuts
 
-When enabled, JavaBean merges links from `JavaBeanMenubarLinks::defaultLinks()` into `user/config/admin-next.yaml`. Edit that method to add your own shortcuts — the public release ships with an empty default list.
+When enabled (default), JavaBean merges live shortcuts into Admin2 `menubarLinks`:
+
+| Icon | Label | URL |
+|------|-------|-----|
+| ✨ | EvvyTink | https://gravmud.site/mud-admin |
+| 🚀 | GetGRAV! | https://goggrav.live |
+| 🏪 | Mud Bazaar | https://gravmud.site/marketplace |
+
+Edit `JavaBeanMenubarLinks::defaultLinks()` to customize.
 
 ### Andy compatibility
 

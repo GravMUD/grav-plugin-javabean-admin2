@@ -2,7 +2,7 @@ enabled: true
 
 active_preset: javabean-classic
 
-inject_menubar_links: false
+inject_menubar_links: true
 
 styling:
 
