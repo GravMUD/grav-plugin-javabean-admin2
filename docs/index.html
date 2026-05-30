@@ -3,138 +3,566 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>JavaBean for Admin2 — Free Grav 2.0 theming</title>
-  <meta name="description" content="Twelve Admin2 preset cockpits, Paint Shop styling, Andy light/dark compatible. MIT · GravMUD · Team DC">
+  <title>JavaBean for Admin2 — Paint the flight deck</title>
+  <meta name="description" content="FREE Admin2 theming for Grav 2.0. Twelve cockpits. Paint Shop. Andy-compatible. MIT forever. Team DC drops the receipt.">
+  <meta property="og:title" content="JavaBean for Admin2">
+  <meta property="og:description" content="Andy builds the cathedral. We paint the flight deck. ☕">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #1a1209;
-      --fg: #f5ebe0;
-      --accent: #e85d04;
-      --accent2: #f48c06;
-      --muted: #a68a72;
-      --card: #2a1f14;
-      --border: #4a3728;
+      --bg: #0c0612;
+      --fg: #fff8f0;
+      --muted: #c4a88a;
+      --sunset-1: #ff6b35;
+      --sunset-2: #f72585;
+      --sunset-3: #7209b7;
+      --mint: #2dd4a8;
+      --lime: #a3e635;
+      --card: rgba(255, 248, 240, 0.04);
+      --border: rgba(255, 200, 150, 0.14);
+      --glow: rgba(255, 107, 53, 0.45);
     }
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
-      background: radial-gradient(ellipse 120% 80% at 50% -20%, #3d2817 0%, var(--bg) 55%);
+      background: var(--bg);
       color: var(--fg);
-      line-height: 1.6;
-      min-height: 100vh;
+      line-height: 1.55;
+      overflow-x: hidden;
     }
-    .wrap { max-width: 720px; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
-    .badge {
-      display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--accent2);
-      margin-bottom: 0.75rem;
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 90% 60% at 20% -10%, rgba(247, 37, 133, 0.35), transparent 55%),
+        radial-gradient(ellipse 70% 50% at 90% 10%, rgba(255, 107, 53, 0.4), transparent 50%),
+        radial-gradient(ellipse 80% 60% at 50% 100%, rgba(114, 9, 183, 0.35), transparent 55%),
+        linear-gradient(180deg, #1a0a14 0%, var(--bg) 40%, #0a0610 100%);
+      z-index: -2;
+      animation: skyShift 18s ease-in-out infinite alternate;
     }
-    h1 {
-      font-size: clamp(2rem, 6vw, 2.75rem);
+    @keyframes skyShift {
+      0% { filter: hue-rotate(0deg) brightness(1); }
+      100% { filter: hue-rotate(12deg) brightness(1.08); }
+    }
+    .grain {
+      position: fixed;
+      inset: 0;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: -1;
+    }
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.85rem 1.5rem;
+      backdrop-filter: blur(14px);
+      background: rgba(12, 6, 18, 0.72);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-family: 'Space Grotesk', sans-serif;
       font-weight: 700;
-      line-height: 1.15;
-      margin: 0 0 0.5rem;
+      font-size: 1.05rem;
+      text-decoration: none;
+      color: var(--fg);
     }
-    h1 span { color: var(--accent); }
-    .tagline { font-size: 1.05rem; color: var(--muted); margin: 0 0 2rem; font-style: italic; }
-    .lead { font-size: 1.1rem; margin-bottom: 2rem; }
-    .cards { display: grid; gap: 1rem; margin: 2rem 0; }
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 0.85rem;
-      padding: 1.25rem 1.35rem;
-    }
-    .card h2 { margin: 0 0 0.5rem; font-size: 1rem; color: var(--accent2); }
-    .card p { margin: 0; color: var(--muted); font-size: 0.95rem; }
-    .card ul { margin: 0.5rem 0 0; padding-left: 1.2rem; color: var(--fg); font-size: 0.92rem; }
-    .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 2rem 0; }
-    a.btn {
-      display: inline-block;
-      padding: 0.65rem 1.25rem;
+    .logo span { color: var(--sunset-1); }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.55rem 1.1rem;
       border-radius: 999px;
       font-weight: 600;
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       text-decoration: none;
-      transition: transform 0.12s ease;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
     }
-    a.btn:hover { transform: translateY(-1px); }
-    a.btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; }
-    a.btn-ghost { border: 1px solid var(--border); color: var(--fg); }
-    code {
-      background: #0f0a06;
-      padding: 0.15rem 0.45rem;
-      border-radius: 0.35rem;
-      font-size: 0.88em;
+    .btn:hover { transform: translateY(-2px); }
+    .btn-fire {
+      background: linear-gradient(135deg, var(--sunset-1), var(--sunset-2));
+      color: #fff;
+      box-shadow: 0 0 28px var(--glow);
+      animation: pulseGlow 3s ease-in-out infinite;
     }
-    pre {
-      background: #0f0a06;
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 20px var(--glow); }
+      50% { box-shadow: 0 0 36px rgba(247, 37, 133, 0.55); }
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--fg);
       border: 1px solid var(--border);
-      border-radius: 0.65rem;
-      padding: 1rem 1.15rem;
-      overflow-x: auto;
-      font-size: 0.85rem;
-      margin: 1rem 0 0;
     }
-    footer {
-      margin-top: 3rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--border);
-      font-size: 0.85rem;
+    .btn-mint {
+      background: linear-gradient(135deg, #059669, var(--mint));
+      color: #042f1a;
+    }
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 3rem;
+      text-align: center;
+    }
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .pill {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--mint);
+    }
+    .pill.hot { color: var(--sunset-1); border-color: rgba(255, 107, 53, 0.35); }
+    .mug {
+      font-size: 4rem;
+      display: block;
+      margin-bottom: 0.5rem;
+      animation: floatMug 4s ease-in-out infinite;
+      filter: drop-shadow(0 0 24px rgba(255, 107, 53, 0.5));
+    }
+    @keyframes floatMug {
+      0%, 100% { transform: translateY(0) rotate(-3deg); }
+      50% { transform: translateY(-10px) rotate(3deg); }
+    }
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.4rem, 8vw, 4.2rem);
+      font-weight: 700;
+      line-height: 1.05;
+      margin: 0 0 1rem;
+      letter-spacing: -0.03em;
+    }
+    h1 .gradient {
+      background: linear-gradient(135deg, var(--sunset-1), var(--sunset-2), var(--lime));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero-sub {
+      font-size: clamp(1.05rem, 2.5vw, 1.35rem);
+      color: var(--muted);
+      max-width: 640px;
+      margin: 0 auto 1.25rem;
+    }
+    .hero-quote {
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--sunset-1);
+      margin-bottom: 2rem;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; }
+    .ticker-wrap {
+      overflow: hidden;
+      border-block: 1px solid var(--border);
+      background: rgba(0,0,0,0.25);
+      padding: 0.65rem 0;
+      margin: 2.5rem 0 0;
+    }
+    .ticker {
+      display: flex;
+      gap: 3rem;
+      animation: ticker 28s linear infinite;
+      white-space: nowrap;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
       color: var(--muted);
     }
-    footer a { color: var(--accent2); }
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    section { max-width: 1100px; margin: 0 auto; padding: 3.5rem 1.5rem; }
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mint);
+      margin-bottom: 0.5rem;
+    }
+    h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.6rem, 4vw, 2.25rem);
+      margin: 0 0 1rem;
+      letter-spacing: -0.02em;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    .stat {
+      text-align: center;
+      padding: 1.25rem 0.75rem;
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      background: var(--card);
+    }
+    .stat b {
+      display: block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2rem;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--sunset-1), var(--lime));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .stat span { font-size: 0.82rem; color: var(--muted); }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+    .feature {
+      padding: 1.35rem;
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      background: var(--card);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .feature:hover {
+      border-color: rgba(255, 107, 53, 0.4);
+      transform: translateY(-3px);
+    }
+    .feature-icon { font-size: 1.75rem; margin-bottom: 0.5rem; }
+    .feature h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      margin: 0 0 0.4rem;
+      font-size: 1.05rem;
+    }
+    .feature p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+    .presets {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 0.75rem;
+    }
+    .preset {
+      border-radius: 0.85rem;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: transform 0.15s, box-shadow 0.15s;
+      cursor: default;
+    }
+    .preset:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    .preset-chrome {
+      height: 4.5rem;
+      display: flex;
+      flex-direction: column;
+      padding: 0.45rem;
+      gap: 0.25rem;
+    }
+    .preset-bar { height: 0.35rem; border-radius: 999px; opacity: 0.85; }
+    .preset-body { flex: 1; border-radius: 0.35rem; opacity: 0.5; }
+    .preset-meta {
+      padding: 0.55rem 0.65rem;
+      background: rgba(0,0,0,0.45);
+      font-size: 0.72rem;
+    }
+    .preset-meta strong { display: block; font-size: 0.78rem; color: var(--fg); }
+    .preset-meta em { color: var(--muted); font-style: normal; font-size: 0.65rem; }
+    .cocktail {
+      border-radius: 1.25rem;
+      padding: 2rem 1.75rem;
+      border: 1px solid rgba(45, 212, 168, 0.25);
+      background:
+        linear-gradient(160deg, rgba(255, 107, 53, 0.12) 0%, rgba(114, 9, 183, 0.15) 50%, rgba(45, 212, 168, 0.08) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .cocktail::after {
+      content: '🍃';
+      position: absolute;
+      top: 1rem;
+      right: 1.25rem;
+      font-size: 2rem;
+      opacity: 0.35;
+    }
+    .cocktail-glass {
+      display: flex;
+      align-items: flex-end;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      margin-top: 1.25rem;
+    }
+    .glass-art {
+      width: 72px;
+      height: 140px;
+      border: 3px solid rgba(255,255,255,0.2);
+      border-radius: 4px 4px 18px 18px;
+      background: linear-gradient(180deg,
+        rgba(163, 230, 53, 0.15) 0%,
+        rgba(255,255,255,0.05) 15%,
+        rgba(247, 37, 133, 0.2) 45%,
+        rgba(255, 107, 53, 0.55) 75%,
+        rgba(120, 53, 15, 0.8) 100%);
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.3), 0 0 30px rgba(255, 107, 53, 0.2);
+      position: relative;
+    }
+    .glass-art::before {
+      content: '🍋';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.1rem;
+    }
+    .cocktail-steps {
+      flex: 1;
+      min-width: 220px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .cocktail-steps li { margin-bottom: 0.35rem; }
+    .cocktail-toast {
+      margin-top: 1.25rem;
+      font-style: italic;
+      color: var(--lime);
+      font-weight: 600;
+    }
+    .terminal {
+      background: #050308;
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.25rem 1.35rem;
+      font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+      font-size: 0.88rem;
+      box-shadow: 0 0 40px rgba(114, 9, 183, 0.15);
+    }
+    .terminal .prompt { color: var(--mint); }
+    .terminal .cmd { color: var(--fg); }
+    .terminal .comment { color: #6b5b7a; margin-top: 0.75rem; display: block; }
+    .andy-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .andy-chip {
+      padding: 0.4rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      background: var(--card);
+    }
+    .andy-chip.ok { border-color: rgba(45, 212, 168, 0.4); color: var(--mint); }
+    footer {
+      text-align: center;
+      padding: 3rem 1.5rem 4rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+    footer a { color: var(--sunset-1); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @media (max-width: 600px) {
+      .nav-links .btn-ghost { display: none; }
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <p class="badge">☕ GravMUD · Team DC · MIT</p>
-    <h1>JavaBean <span>for Admin2</span></h1>
-    <p class="tagline">Backend templating — 2004 called, it wants its pun back.</p>
-    <p class="lead">Free Admin2 theming for <strong>Grav 2.0</strong> — twelve preset cockpits with paired light/dark tokens, live card picker, and Paint Shop controls. Rides Andy's appearance switcher; uninstall returns stock Admin2.</p>
+  <div class="grain" aria-hidden="true"></div>
 
-    <div class="actions">
-      <a class="btn btn-primary" href="https://github.com/GravMUD/grav-plugin-grav-javabean-admin2">GitHub</a>
-      <a class="btn btn-ghost" href="https://github.com/GravMUD/grav-plugin-grav-javabean-admin2/releases">Download release</a>
-      <a class="btn btn-ghost" href="https://gravmud.site">GravMUD</a>
+  <nav class="nav">
+    <a class="logo" href="#">☕ Java<span>Bean</span></a>
+    <div class="nav-links">
+      <a class="btn btn-ghost" href="#presets">Presets</a>
+      <a class="btn btn-ghost" href="#install">Install</a>
+      <a class="btn btn-fire" href="https://github.com/GravMUD/grav-plugin-grav-javabean-admin2/releases">Get it FREE</a>
     </div>
+  </nav>
 
-    <div class="cards">
-      <div class="card">
-        <h2>Twelve presets</h2>
-        <p>Curated token packs — sans, serif, and mono faces. Grav Cathedral, Midnight Ops, EvvyTink Terminal, and more.</p>
-      </div>
-      <div class="card">
-        <h2>Paint Shop</h2>
-        <p>Accent, density, typography, corners, custom CSS — power users without forking SvelteKit.</p>
-      </div>
-      <div class="card">
-        <h2>Requirements</h2>
-        <ul>
-          <li>Grav 2.0+</li>
-          <li><a href="https://github.com/getgrav/grav-plugin-admin2" style="color:var(--accent2)">Admin2</a></li>
-          <li><a href="https://github.com/getgrav/grav-plugin-api" style="color:var(--accent2)">API plugin</a></li>
-        </ul>
-      </div>
-      <div class="card">
-        <h2>Install</h2>
-        <pre>bin/gpm install grav-javabean-admin2</pre>
-        <p style="margin-top:0.75rem">Or extract to <code>user/plugins/grav-javabean-admin2</code> and clear cache.</p>
+  <header class="hero">
+    <div class="pill-row">
+      <span class="pill hot">MIT · Free forever</span>
+      <span class="pill">Grav 2.0</span>
+      <span class="pill">Admin2</span>
+      <span class="pill">Team DC</span>
+    </div>
+    <span class="mug" aria-hidden="true">☕</span>
+    <h1>Paint the<br><span class="gradient">Admin2 flight deck</span></h1>
+    <p class="hero-sub"><strong>JavaBean for Admin2</strong> — twelve curated cockpits, live preset cards, Paint Shop power tools, and a fourteen-font catalog that actually looks different. Zero Svelte forks. Zero paywalls.</p>
+    <p class="hero-quote">"Andy builds the cathedral. We paint the flight deck."</p>
+    <div class="hero-actions">
+      <a class="btn btn-fire" href="https://github.com/GravMUD/grav-plugin-grav-javabean-admin2">⭐ Star on GitHub</a>
+      <a class="btn btn-mint" href="https://github.com/GravMUD/grav-plugin-grav-javabean-admin2/releases">Download release</a>
+      <a class="btn btn-ghost" href="https://gravmud.site">GravMUD HQ</a>
+    </div>
+    <div class="ticker-wrap" aria-hidden="true">
+      <div class="ticker">
+        <span>12 presets</span><span>·</span><span>24 light/dark token maps</span><span>·</span><span>14 fonts sans serif mono</span><span>·</span><span>live card picker</span><span>·</span><span>paint shop</span><span>·</span><span>andy switcher compatible</span><span>·</span><span>backend templating since 2004</span><span>·</span><span>uninstall = stock admin2</span><span>·</span>
+        <span>12 presets</span><span>·</span><span>24 light/dark token maps</span><span>·</span><span>14 fonts sans serif mono</span><span>·</span><span>live card picker</span><span>·</span><span>paint shop</span><span>·</span><span>andy switcher compatible</span><span>·</span><span>backend templating since 2004</span><span>·</span><span>uninstall = stock admin2</span><span>·</span>
       </div>
     </div>
+  </header>
 
-    <footer>
-      <p>FutureVision Labs · Team DC · <a href="https://gravmud.site/services">EvvyTink &amp; services</a> · <a href="https://getgrav.live">GetGRAV!</a> · <a href="https://gravmud.site/marketplace">Mud Bazaar</a></p>
-      <p>MIT licensed — free forever.</p>
-    </footer>
-  </div>
+  <section class="reveal">
+    <p class="section-label">The numbers don't lie</p>
+    <h2>One plugin. Maximum vibe.</h2>
+    <div class="stats">
+      <div class="stat"><b>12</b><span>theme presets</span></div>
+      <div class="stat"><b>24</b><span>light + dark maps</span></div>
+      <div class="stat"><b>14</b><span>font faces</span></div>
+      <div class="stat"><b>$0</b><span>forever MIT</span></div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <p class="section-label">Why it hits different</p>
+    <h2>Not another grey sans dashboard.</h2>
+    <div class="grid-3">
+      <div class="feature">
+        <div class="feature-icon">🎴</div>
+        <h3>Live preset cards</h3>
+        <p>Click a cockpit — preview instantly. Cards track Andy's light/dark switcher. No reload cosplay.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🎨</div>
+        <h3>Paint Shop</h3>
+        <p>Accent HSV, density, typography, corner radius, custom CSS escape hatch. Power users rejoice.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🔤</div>
+        <h3>Real font variety</h3>
+        <p>Serif cathedrals. Mono terminals. Synthwave grotesk. Not five slightly different Inter clones.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🌓</div>
+        <h3>Andy-compatible</h3>
+        <p>Rides the built-in appearance switcher. Syncs accent + fonts. Uninstall and you're back to stock.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🚀</div>
+        <h3>Grav 2.0 native</h3>
+        <p>Admin2 + API bridge. Custom fields. REST endpoints. Built for the RC5 future, not 2019 cosplay.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🎁</div>
+        <h3>Ecosystem hello-gift</h3>
+        <p>Team DC's free layer on Andy's free Admin2. Commercial plugins stay separate. No bait-and-switch.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="presets" class="reveal">
+    <p class="section-label">Pick your cockpit</p>
+    <h2>Twelve presets. Zero boredom.</h2>
+    <p style="color:var(--muted);max-width:560px">Each preset ships paired <strong style="color:var(--fg)">light + dark</strong> token maps — JavaBean Classic, Synthwave, Grav Cathedral, EvvyTink Terminal, GoGrav! Rally, and more.</p>
+    <div class="presets" style="margin-top:1.5rem">
+      <div class="preset"><div class="preset-chrome" style="background:hsl(35 33% 97%)"><div class="preset-bar" style="background:hsl(25 95% 42%);width:60%"></div><div class="preset-body" style="background:hsl(32 20% 92%)"></div></div><div class="preset-meta"><strong>JavaBean Classic</strong><em>2004 coffee energy</em></div></div>
+      <div class="preset"><div class="preset-chrome" style="background:hsl(38 30% 96%)"><div class="preset-bar" style="background:hsl(38 92% 50%);width:55%"></div><div class="preset-body" style="background:hsl(40 22% 91%)"></div></div><div class="preset-meta"><strong>Backenders Amber</strong><em>Mambo-era gold</em></div></div>
+      <div class="preset"><div class="preset-chrome" style="background:hsl(150 20% 96%)"><div class="preset-bar" style="background:hsl(160 84% 38%);width:50%"></div><div class="preset-body" style="background:hsl(155 18% 91%)"></div></div><div class="preset-meta"><strong>WWWeed Emerald</strong><em>Gemzy banner green</em></div></div>
+      <div class="preset"><div class="preset-chrome" style="background:hsl(280 30% 8%)"><div class="preset-bar" style="background:hsl(300 100% 65%);width:70%"></div><div class="preset-body" style="background:hsl(280 25% 14%)"></div></div><div class="preset-meta"><strong>Team DC Synthwave</strong><em>FutureVision neon</em></div></div>
+      <div class="preset"><div class="preset-chrome" style="background:hsl(0 20% 8%)"><div class="preset-bar" style="background:hsl(0 85% 55%);width:65%"></div><div class="preset-body" style="background:hsl(0 15% 14%)"></div></div><div class="preset-meta"><strong>GoGrav! Rally</strong><em>GetGRAV campaign red</em></div></div>
+      <div class="preset"><div class="preset-chrome" style="background:hsl(220 25% 97%)"><div class="preset-bar" style="background:hsl(221 83% 48%);width:45%"></div><div class="preset-body" style="background:hsl(218 20% 93%)"></div></div><div class="preset-meta"><strong>Grav Cathedral</strong><em>Respect Andy's blues</em></div></div>
+      <div class="preset"><div class="preset-chrome" style="background:hsl(230 15% 7%)"><div class="preset-bar" style="background:hsl(210 100% 60%);width:55%"></div><div class="preset-body" style="background:hsl(230 12% 12%)"></div></div><div class="preset-meta"><strong>Midnight Ops</strong><em>Editor at 2am</em></div></div>
+      <div class="preset"><div class="preset-chrome" style="background:hsl(40 20% 92%)"><div class="preset-bar" style="background:hsl(25 80% 45%);width:50%"></div><div class="preset-body" style="background:hsl(38 15% 86%)"></div></div><div class="preset-meta"><strong>Mambo Desktop</strong><em>CRT nostalgia</em></div></div>
+      <div class="preset"><div class="preset-chrome" style="background:hsl(30 18% 95%)"><div class="preset-bar" style="background:hsl(25 60% 42%);width:48%"></div><div class="preset-body" style="background:hsl(32 14% 90%)"></div></div><div class="preset-meta"><strong>Mud Bazaar</strong><em>Marketplace neutrals</em></div></div>
+      <div class="preset"><div class="preset-chrome" style="background:hsl(120 15% 5%)"><div class="preset-bar" style="background:hsl(120 100% 45%);width:60%"></div><div class="preset-body" style="background:hsl(120 12% 10%)"></div></div><div class="preset-meta"><strong>EvvyTink Terminal</strong><em>Green phosphor weird</em></div></div>
+      <div class="preset"><div class="preset-chrome" style="background:hsl(210 25% 98%)"><div class="preset-bar" style="background:hsl(221 83% 48%);width:42%"></div><div class="preset-body" style="background:hsl(212 20% 95%)"></div></div><div class="preset-meta"><strong>Nordic Frost</strong><em>Scandinavian calm</em></div></div>
+      <div class="preset"><div class="preset-chrome" style="background:#fff"><div class="preset-bar" style="background:#000;width:80%"></div><div class="preset-body" style="background:#f0f0f0"></div></div><div class="preset-meta"><strong>High Contrast</strong><em>WCAG boss mode</em></div></div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <p class="section-label">Andy said build on it</p>
+    <h2>We ride the switcher. We don't replace it.</h2>
+    <p style="color:var(--muted)">JavaBean layers on Admin2 — Settings → Appearance still works. Light, dark, system, accent HSV, font picker. JavaBean suggests; you override in Paint Shop whenever you want.</p>
+    <div class="andy-row">
+      <span class="andy-chip ok">✓ light / dark / system</span>
+      <span class="andy-chip ok">✓ accent hue + saturation</span>
+      <span class="andy-chip ok">✓ font sync</span>
+      <span class="andy-chip ok">✓ uninstall = stock chrome</span>
+    </div>
+  </section>
+
+  <section id="install" class="reveal">
+    <p class="section-label">Ship it</p>
+    <h2>Install in sixty seconds.</h2>
+    <div class="terminal">
+      <span class="prompt">grav $</span> <span class="cmd">bin/gpm install grav-javabean-admin2</span>
+      <span class="comment"># Needs Grav 2.0 + admin2 + api plugins enabled</span>
+      <span class="comment"># Or: extract to user/plugins/grav-javabean-admin2 → bin/grav cache</span>
+      <span class="comment"># Admin2 → JavaBean → pick a preset → save → flex</span>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="cocktail">
+      <p class="section-label" style="color:var(--lime)">Thursday service · Team DC spec</p>
+      <h2>JavaBean Sunset 🌅</h2>
+      <p style="color:var(--muted);margin:0">Official victory-lap cocktail. Sticky date pudding energy in a glass — caramel bottom, ginger fire, cold vodka top. <strong style="color:var(--fg)">Do not stir.</strong> Let it layer like a proper sunset.</p>
+      <div class="cocktail-glass">
+        <div class="glass-art" title="Tall glass. Lime wheel. Mint. Vader-approved."></div>
+        <ol class="cocktail-steps">
+          <li>Zero-carb caramel in the bottom</li>
+          <li>Ice → vodka → sugar-free ginger beer</li>
+          <li>Squeeze of lime · <strong style="color:var(--lime)">lime wheel + mint leaves</strong></li>
+          <li>Best served in dark mode Admin2</li>
+        </ol>
+      </div>
+      <p class="cocktail-toast">Toast: "Andy builds the cathedral. We paint the flight deck." — then push to main.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p><strong>FutureVision Labs · Team DC · GravMUD</strong></p>
+    <p>
+      <a href="https://github.com/GravMUD/grav-plugin-grav-javabean-admin2">GitHub</a> ·
+      <a href="https://gravmud.site/services">EvvyTink &amp; Services</a> ·
+      <a href="https://getgrav.live">GetGRAV!</a> ·
+      <a href="https://gravmud.site/marketplace">Mud Bazaar</a>
+    </p>
+    <p style="margin-top:1rem;font-size:0.78rem">MIT licensed · free forever · backend templating since 2004</p>
+  </footer>
+
+  <script>
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach((el) => obs.observe(el));
+  </script>
 </body>
 </html>
