@@ -1,5 +1,7 @@
 # JavaBean for Admin2
 
+**Site:** [javabean.gravmud.site](https://javabean.gravmud.site) · **Repo:** [GravMUD/grav-plugin-grav-javabean-admin2](https://github.com/GravMUD/grav-plugin-grav-javabean-admin2)
+
 **Free Admin2 theming for Grav 2.0** — twelve preset cockpits, light/dark pairs, Andy's appearance switcher compatible.
 
 > *Backend templating — 2004 called, it wants its pun back.*

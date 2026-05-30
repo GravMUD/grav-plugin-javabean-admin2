@@ -1,3 +1,11 @@
+# v1.0.0
+## 05/30/2026
+
+1. [](#new)
+    * Public 1.0 launch — JavaBean for Admin2
+    * Site and docs at https://javabean.gravmud.site
+    * Twelve presets, Paint Shop, fourteen-font catalog, Andy appearance sync
+
 # v0.1.0
 ## 05/30/2026
 
