@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JavaBean for Admin2 — Free Grav 2.0 theming</title>
+  <meta name="description" content="Twelve Admin2 preset cockpits, Paint Shop styling, Andy light/dark compatible. MIT · GravMUD · Team DC">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #1a1209;
+      --fg: #f5ebe0;
+      --accent: #e85d04;
+      --accent2: #f48c06;
+      --muted: #a68a72;
+      --card: #2a1f14;
+      --border: #4a3728;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
+      background: radial-gradient(ellipse 120% 80% at 50% -20%, #3d2817 0%, var(--bg) 55%);
+      color: var(--fg);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .wrap { max-width: 720px; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+    .badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 0.75rem;
+    }
+    h1 {
+      font-size: clamp(2rem, 6vw, 2.75rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin: 0 0 0.5rem;
+    }
+    h1 span { color: var(--accent); }
+    .tagline { font-size: 1.05rem; color: var(--muted); margin: 0 0 2rem; font-style: italic; }
+    .lead { font-size: 1.1rem; margin-bottom: 2rem; }
+    .cards { display: grid; gap: 1rem; margin: 2rem 0; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 0.85rem;
+      padding: 1.25rem 1.35rem;
+    }
+    .card h2 { margin: 0 0 0.5rem; font-size: 1rem; color: var(--accent2); }
+    .card p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+    .card ul { margin: 0.5rem 0 0; padding-left: 1.2rem; color: var(--fg); font-size: 0.92rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 2rem 0; }
+    a.btn {
+      display: inline-block;
+      padding: 0.65rem 1.25rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      text-decoration: none;
+      transition: transform 0.12s ease;
+    }
+    a.btn:hover { transform: translateY(-1px); }
+    a.btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; }
+    a.btn-ghost { border: 1px solid var(--border); color: var(--fg); }
+    code {
+      background: #0f0a06;
+      padding: 0.15rem 0.45rem;
+      border-radius: 0.35rem;
+      font-size: 0.88em;
+    }
+    pre {
+      background: #0f0a06;
+      border: 1px solid var(--border);
+      border-radius: 0.65rem;
+      padding: 1rem 1.15rem;
+      overflow-x: auto;
+      font-size: 0.85rem;
+      margin: 1rem 0 0;
+    }
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    footer a { color: var(--accent2); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="badge">☕ GravMUD · Team DC · MIT</p>
+    <h1>JavaBean <span>for Admin2</span></h1>
+    <p class="tagline">Backend templating — 2004 called, it wants its pun back.</p>
+    <p class="lead">Free Admin2 theming for <strong>Grav 2.0</strong> — twelve preset cockpits with paired light/dark tokens, live card picker, and Paint Shop controls. Rides Andy's appearance switcher; uninstall returns stock Admin2.</p>
+
+    <div class="actions">
+      <a class="btn btn-primary" href="https://github.com/GravMUD/grav-plugin-grav-javabean-admin2">GitHub</a>
+      <a class="btn btn-ghost" href="https://github.com/GravMUD/grav-plugin-grav-javabean-admin2/releases">Download release</a>
+      <a class="btn btn-ghost" href="https://gravmud.site">GravMUD</a>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <h2>Twelve presets</h2>
+        <p>Curated token packs — sans, serif, and mono faces. Grav Cathedral, Midnight Ops, EvvyTink Terminal, and more.</p>
+      </div>
+      <div class="card">
+        <h2>Paint Shop</h2>
+        <p>Accent, density, typography, corners, custom CSS — power users without forking SvelteKit.</p>
+      </div>
+      <div class="card">
+        <h2>Requirements</h2>
+        <ul>
+          <li>Grav 2.0+</li>
+          <li><a href="https://github.com/getgrav/grav-plugin-admin2" style="color:var(--accent2)">Admin2</a></li>
+          <li><a href="https://github.com/getgrav/grav-plugin-api" style="color:var(--accent2)">API plugin</a></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Install</h2>
+        <pre>bin/gpm install grav-javabean-admin2</pre>
+        <p style="margin-top:0.75rem">Or extract to <code>user/plugins/grav-javabean-admin2</code> and clear cache.</p>
+      </div>
+    </div>
+
+    <footer>
+      <p>FutureVision Labs · Team DC · <a href="https://gravmud.site/services">EvvyTink &amp; services</a> · <a href="https://getgrav.live">GetGRAV!</a> · <a href="https://gravmud.site/marketplace">Mud Bazaar</a></p>
+      <p>MIT licensed — free forever.</p>
+    </footer>
+  </div>
+</body>
+</html>
