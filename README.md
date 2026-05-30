@@ -49,7 +49,7 @@ When enabled (default), JavaBean merges live shortcuts into Admin2 `menubarLinks
 
 | Icon | Label | URL |
 |------|-------|-----|
-| ✨ | EvvyTink | https://gravmud.site/mud-admin |
+| ✨ | EvvyTink | https://gravmud.site/services |
 | 🚀 | GetGRAV! | https://goggrav.live |
 | 🏪 | Mud Bazaar | https://gravmud.site/marketplace |
 

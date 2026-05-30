@@ -49,7 +49,7 @@ form:
       label: Inject Team DC header icons
       highlight: 1
       default: 1
-      help: Adds EvvyTink, GetGRAV!, and Mud Bazaar shortcuts to the Admin2 top bar (live site URLs)
+      help: Adds EvvyTink (Services), GetGRAV!, and Mud Bazaar shortcuts to the Admin2 top bar
       options:
         1: Enabled
         0: Disabled

@@ -18,7 +18,7 @@ class JavaBeanMenubarLinks
         return [
             [
                 'label' => 'EvvyTink',
-                'url' => 'https://gravmud.site/mud-admin',
+                'url' => 'https://gravmud.site/services',
                 'icon' => 'fa-wand-magic-sparkles',
                 'external' => true,
             ],
