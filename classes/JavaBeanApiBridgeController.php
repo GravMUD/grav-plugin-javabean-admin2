@@ -131,18 +131,13 @@ class JavaBeanApiBridgeController extends AbstractApiController
         $data = $file->exists() ? (array) $file->content() : [];
         $data['enabled'] = (bool) $current['enabled'];
         $data['active_preset'] = (string) $current['active_preset'];
-        $data['inject_menubar_links'] = (bool) ($current['inject_menubar_links'] ?? true);
+        $data['inject_menubar_links'] = (bool) ($current['inject_menubar_links'] ?? false);
         $data['styling'] = $current['styling'];
         unset($data['density'], $data['custom_css']);
         $file->save($data);
         $file->free();
 
         $this->config->reload();
-
-        if (!empty($data['inject_menubar_links'])) {
-            require_once __DIR__ . '/JavaBeanMenubarLinks.php';
-            (new JavaBeanMenubarLinks())->mergeTeamDcLinks($this->grav);
-        }
     }
 
     /** @return array<string, mixed> */
@@ -153,7 +148,7 @@ class JavaBeanApiBridgeController extends AbstractApiController
         return [
             'enabled' => (bool) ($cfg['enabled'] ?? true),
             'active_preset' => (string) ($cfg['active_preset'] ?? 'javabean-classic'),
-            'inject_menubar_links' => (bool) ($cfg['inject_menubar_links'] ?? true),
+            'inject_menubar_links' => (bool) ($cfg['inject_menubar_links'] ?? false),
             'styling' => $this->normalizeStyling(
                 is_array($cfg['styling'] ?? null) ? $cfg['styling'] : [],
                 $cfg

@@ -25,6 +25,7 @@ class GravJavabeanAdmin2Plugin extends Plugin
             $events['onApiAdminSettingsPanels'] = ['onApiAdminSettingsPanels', 0];
             $events['onApiSidebarItems'] = ['onApiSidebarItems', 0];
             $events['onApiPluginPageInfo'] = ['onApiPluginPageInfo', 0];
+            $events['onApiMenubarItems'] = ['onApiMenubarItems', 0];
         }
 
         return $events;
@@ -37,10 +38,24 @@ class GravJavabeanAdmin2Plugin extends Plugin
         }
 
         $this->loadClasses();
+    }
 
-        if ($this->isEnabled()) {
-            (new JavaBeanMenubarLinks())->mergeTeamDcLinks($this->grav);
+    public function onApiMenubarItems(Event $event): void
+    {
+        if (!$this->isEnabled()) {
+            return;
         }
+
+        $user = $event['user'] ?? null;
+        if (!$user || !($user->get('access.api.access') || $user->get('access.api.super'))) {
+            return;
+        }
+
+        $items = $event['items'] ?? [];
+        foreach ((new JavaBeanMenubarLinks())->apiItems($this->grav) as $item) {
+            $items[] = $item;
+        }
+        $event['items'] = $items;
     }
 
     public function onPagesInitializedEarly(): void

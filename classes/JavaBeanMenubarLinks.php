@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace Grav\Plugin\JavaBeanAdmin2;
 
 use Grav\Common\Grav;
-use RocketTheme\Toolbox\File\YamlFile;
 
 /**
- * Merges Team DC header shortcut icons into admin-next menubarLinks.
+ * Runtime Team DC header shortcuts via onApiMenubarItems (no admin-next.yaml writes).
  */
 class JavaBeanMenubarLinks
 {
@@ -17,10 +16,10 @@ class JavaBeanMenubarLinks
     {
         return [
             [
-                'label' => 'EvvyTink',
-                'url' => 'https://gravmud.site/services',
+                'label' => 'MUD Editor',
+                'url' => '/plugin/grav-mud-admin',
                 'icon' => 'fa-wand-magic-sparkles',
-                'external' => true,
+                'external' => false,
             ],
             [
                 'label' => 'GetGRAV!',
@@ -37,70 +36,41 @@ class JavaBeanMenubarLinks
         ];
     }
 
-    public function mergeTeamDcLinks(Grav $grav): void
+    public function shouldInject(Grav $grav): bool
     {
-        if (!(bool) $grav['config']->get('plugins.grav-javabean-admin2.inject_menubar_links', true)) {
-            return;
+        if (!(bool) $grav['config']->get('plugins.grav-javabean-admin2.enabled', false)) {
+            return false;
         }
 
-        $path = $grav['locator']->findResource('user://config/admin-next.yaml', true, true);
-        if (!$path || !is_file($path)) {
-            $path = $grav['locator']->findResource('user://config', true, true);
-            if (!$path) {
-                return;
-            }
-            $path .= '/admin-next.yaml';
-        }
-
-        $file = YamlFile::instance($path);
-        $data = $file->exists() ? (array) $file->content() : [];
-        $ui = is_array($data['ui'] ?? null) ? $data['ui'] : [];
-        $settings = is_array($ui['settings'] ?? null) ? $ui['settings'] : [];
-        $existing = is_array($settings['menubarLinks'] ?? null) ? $settings['menubarLinks'] : [];
-
-        $merged = $this->mergeUnique($existing, self::defaultLinks());
-        if ($merged === $existing) {
-            $file->free();
-            return;
-        }
-
-        $settings['menubarLinks'] = $merged;
-        $ui['settings'] = $settings;
-        $data['ui'] = $ui;
-        $file->save($data);
-        $file->free();
-
-        $grav['config']->reload();
+        return (bool) $grav['config']->get('plugins.grav-javabean-admin2.inject_menubar_links', false);
     }
 
-    /**
-     * @param array<int, array<string, mixed>> $existing
-     * @param array<int, array<string, mixed>> $toAdd
-     * @return array<int, array<string, mixed>>
-     */
-    private function mergeUnique(array $existing, array $toAdd): array
+    /** @return list<array<string, mixed>> */
+    public function apiItems(Grav $grav): array
     {
-        $keys = [];
-        foreach ($existing as $link) {
-            $keys[$this->linkKey($link)] = true;
+        if (!$this->shouldInject($grav)) {
+            return [];
         }
 
-        $out = $existing;
-        foreach ($toAdd as $link) {
-            $key = $this->linkKey($link);
-            if (isset($keys[$key])) {
+        $items = [];
+        foreach (self::defaultLinks() as $index => $link) {
+            $url = trim((string) ($link['url'] ?? ''));
+            $label = trim((string) ($link['label'] ?? ''));
+            if ($url === '' || $label === '') {
                 continue;
             }
-            $keys[$key] = true;
-            $out[] = $link;
+
+            $items[] = [
+                'id' => 'javabean-link-' . substr(md5(strtolower($url) . '|' . strtolower($label)), 0, 12),
+                'plugin' => 'grav-javabean-admin2',
+                'label' => $label,
+                'icon' => trim((string) ($link['icon'] ?? 'fa-link')) ?: 'fa-link',
+                'url' => $url,
+                'external' => !empty($link['external']),
+                'priority' => 40 + $index,
+            ];
         }
 
-        return $out;
-    }
-
-    /** @param array<string, mixed> $link */
-    private function linkKey(array $link): string
-    {
-        return strtolower((string) ($link['url'] ?? '')) . '|' . strtolower((string) ($link['label'] ?? ''));
+        return $items;
     }
 }

@@ -1,7 +1,7 @@
 name: JavaBean for Admin2
 slug: grav-javabean-admin2
 type: plugin
-version: 1.0.0
+version: 1.0.1
 description: Free Admin2 theme presets — twelve cockpits, light/dark pairs, Andy switcher compatible.
 icon: mug-hot
 author:
@@ -46,10 +46,10 @@ form:
         spacious: Spacious
     inject_menubar_links:
       type: toggle
-      label: Inject Team DC header icons
+      label: Show Team DC header icons
       highlight: 1
-      default: 1
-      help: Adds EvvyTink (Services), GetGRAV!, and Mud Bazaar shortcuts to the Admin2 top bar
+      default: 0
+      help: Registers MUD Editor, GetGRAV!, and Mud Bazaar via the Admin2 menubar API. Does not write admin-next.yaml.
       options:
         1: Enabled
         0: Disabled

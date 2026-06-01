@@ -1,3 +1,10 @@
+# v1.0.1
+## 06/01/2026
+
+1. [](#improved)
+    * Team DC header icons register at runtime via `onApiMenubarItems` — no longer writes `user/config/admin-next.yaml`
+    * `inject_menubar_links` defaults to off (opt-in)
+
 # v1.0.0
 ## 05/30/2026
 
