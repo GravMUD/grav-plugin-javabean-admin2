@@ -21,7 +21,7 @@ class JavaBeanAdminShell
 
     public function maybeServe(): void
     {
-        $cfg = (array) $this->grav['config']->get('plugins.grav-javabean-admin2', []);
+        $cfg = JavaBeanLegacy::config($this->grav);
         if (empty($cfg['enabled'])) {
             return;
         }
@@ -66,7 +66,7 @@ class JavaBeanAdminShell
         ], JSON_UNESCAPED_SLASHES);
 
         $css = $this->engine->buildCss($cfg);
-        $pluginBase = $rootPath . '/user/plugins/grav-javabean-admin2/assets';
+        $pluginBase = $rootPath . '/user/plugins/' . basename(JavaBeanLegacy::pluginDir()) . '/assets';
         $presetSlug = htmlspecialchars((string) ($cfg['active_preset'] ?? 'javabean-classic'), ENT_QUOTES, 'UTF-8');
 
         require_once __DIR__ . '/JavaBeanFontCatalog.php';

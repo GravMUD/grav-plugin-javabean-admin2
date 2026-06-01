@@ -57,7 +57,7 @@ class JavaBeanApiBridgeController extends AbstractApiController
     {
         $this->requirePermission($request, 'api.access');
 
-        $cfg = (array) $this->config->get('plugins.grav-javabean-admin2', []);
+        $cfg = JavaBeanLegacy::config($this->grav);
         $query = $request->getQueryParams();
         if (!empty($query['preset'])) {
             $cfg['active_preset'] = (string) $query['preset'];
@@ -81,7 +81,7 @@ class JavaBeanApiBridgeController extends AbstractApiController
     /** @return array<string, mixed> */
     private function readSettings(): array
     {
-        $cfg = (array) $this->config->get('plugins.grav-javabean-admin2', []);
+        $cfg = JavaBeanLegacy::config($this->grav);
         $styling = $this->normalizeStyling(
             is_array($cfg['styling'] ?? null) ? $cfg['styling'] : [],
             $cfg
@@ -122,12 +122,7 @@ class JavaBeanApiBridgeController extends AbstractApiController
             $current['active_preset'] = 'javabean-classic';
         }
 
-        $path = $this->grav['locator']->findResource('user://config/plugins', true, true);
-        if (!$path) {
-            throw new \RuntimeException('Unable to resolve plugin config path.');
-        }
-
-        $file = YamlFile::instance($path . '/grav-javabean-admin2.yaml');
+        $file = YamlFile::instance(JavaBeanLegacy::configFilePath($this->grav));
         $data = $file->exists() ? (array) $file->content() : [];
         $data['enabled'] = (bool) $current['enabled'];
         $data['active_preset'] = (string) $current['active_preset'];
@@ -143,7 +138,7 @@ class JavaBeanApiBridgeController extends AbstractApiController
     /** @return array<string, mixed> */
     private function internalSettings(): array
     {
-        $cfg = (array) $this->config->get('plugins.grav-javabean-admin2', []);
+        $cfg = JavaBeanLegacy::config($this->grav);
 
         return [
             'enabled' => (bool) ($cfg['enabled'] ?? true),

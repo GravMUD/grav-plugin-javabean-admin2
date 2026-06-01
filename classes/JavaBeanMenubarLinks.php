@@ -38,11 +38,11 @@ class JavaBeanMenubarLinks
 
     public function shouldInject(Grav $grav): bool
     {
-        if (!(bool) $grav['config']->get('plugins.grav-javabean-admin2.enabled', false)) {
+        if (!JavaBeanLegacy::isEnabled($grav)) {
             return false;
         }
 
-        return (bool) $grav['config']->get('plugins.grav-javabean-admin2.inject_menubar_links', false);
+        return (bool) (JavaBeanLegacy::config($grav)['inject_menubar_links'] ?? false);
     }
 
     /** @return list<array<string, mixed>> */
@@ -62,7 +62,7 @@ class JavaBeanMenubarLinks
 
             $items[] = [
                 'id' => 'javabean-link-' . substr(md5(strtolower($url) . '|' . strtolower($label)), 0, 12),
-                'plugin' => 'grav-javabean-admin2',
+                'plugin' => 'javabean-admin2',
                 'label' => $label,
                 'icon' => trim((string) ($link['icon'] ?? 'fa-link')) ?: 'fa-link',
                 'url' => $url,

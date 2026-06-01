@@ -1,3 +1,12 @@
+# v1.1.0
+## 06/01/2026
+
+1. [](#breaking)
+    * Plugin slug **`javabean-admin2`** (was `grav-javabean-admin2`) — Grav convention: repo `grav-plugin-javabean-admin2`, folder without extra `grav-` prefix
+    * Admin plugin route `/plugin/javabean-admin2` (API routes stay `/javabean/*`)
+    * Auto-migrates `user/config/plugins/grav-javabean-admin2.yaml` and `system.yaml` plugin enable entry on first load
+    * Remove old `user/plugins/grav-javabean-admin2` folder after upgrade; run `bin/grav cache`
+
 # v1.0.1
 ## 06/01/2026
 

@@ -1,6 +1,6 @@
 # JavaBean for Admin2
 
-**Site:** [javabean.gravmud.site](https://javabean.gravmud.site) · **Repo:** [GravMUD/grav-plugin-grav-javabean-admin2](https://github.com/GravMUD/grav-plugin-grav-javabean-admin2)
+**Site:** [javabean.gravmud.site](https://javabean.gravmud.site) · **Repo:** [GravMUD/grav-plugin-javabean-admin2](https://github.com/GravMUD/grav-plugin-javabean-admin2)
 
 **Free Admin2 theming for Grav 2.0** — twelve preset cockpits, light/dark pairs, Andy's appearance switcher compatible.
 
@@ -9,6 +9,8 @@
 JavaBean layers on [Admin2](https://github.com/getgrav/grav-plugin-admin2). It does **not** replace Settings → Appearance. It ships curated token packs and a Paint Shop for power users who want a cockpit without forking SvelteKit.
 
 **License:** MIT — free forever. Commercial GravMUD plugins (Commentz, Forumz, Marketplace, etc.) are separate products and are **not** part of this repository.
+
+> **Upgrading from `grav-javabean-admin2`?** Remove the old plugin folder, install `javabean-admin2`, run `bin/grav cache`. Config in `user/config/plugins/` and `system.yaml` migrates automatically on first load (v1.1.0+).
 
 ## Requirements
 
@@ -23,13 +25,13 @@ JavaBean layers on [Admin2](https://github.com/getgrav/grav-plugin-admin2). It d
 ### GPM (once listed)
 
 ```bash
-bin/gpm install grav-javabean-admin2
+bin/gpm install javabean-admin2
 ```
 
 ### Manual
 
 1. Download the latest release zip.
-2. Extract to `user/plugins/grav-javabean-admin2`.
+2. Extract to `user/plugins/javabean-admin2`.
 3. Clear cache: `bin/grav cache` or Admin2 → Clear Cache.
 4. Enable **JavaBean for Admin2** in Admin2 → Plugins.
 
@@ -71,7 +73,7 @@ Uninstalling JavaBean returns stock Admin2 chrome. Andy's switcher is untouched.
 
 ```bash
 # From your Grav root — symlink or copy the plugin folder
-user/plugins/grav-javabean-admin2/
+user/plugins/javabean-admin2/
 ```
 
 Custom Admin2 fields live under `admin-next/fields/`. After JS changes, hard-refresh Admin2 (failed field loads are cached in session).

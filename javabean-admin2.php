@@ -5,6 +5,7 @@ namespace Grav\Plugin;
 use Grav\Common\Plugin;
 use Grav\Plugin\JavaBeanAdmin2\JavaBeanAdminShell;
 use Grav\Plugin\JavaBeanAdmin2\JavaBeanApiBridgeController;
+use Grav\Plugin\JavaBeanAdmin2\JavaBeanLegacy;
 use Grav\Plugin\JavaBeanAdmin2\JavaBeanMenubarLinks;
 use Grav\Plugin\JavaBeanAdmin2\JavaBeanThemeEngine;
 use RocketTheme\Toolbox\Event\Event;
@@ -38,6 +39,7 @@ class GravJavabeanAdmin2Plugin extends Plugin
         }
 
         $this->loadClasses();
+        JavaBeanLegacy::maybeMigrate($this->grav);
     }
 
     public function onApiMenubarItems(Event $event): void
@@ -99,10 +101,10 @@ class GravJavabeanAdmin2Plugin extends Plugin
         $items = $event['items'] ?? [];
         $items[] = [
             'id' => 'javabean-admin2',
-            'plugin' => 'grav-javabean-admin2',
+            'plugin' => 'javabean-admin2',
             'label' => 'JavaBean',
             'icon' => 'fa-mug-hot',
-            'route' => '/plugin/grav-javabean-admin2',
+            'route' => '/plugin/javabean-admin2',
             'priority' => 85,
         ];
         $event['items'] = $items;
@@ -110,7 +112,8 @@ class GravJavabeanAdmin2Plugin extends Plugin
 
     public function onApiPluginPageInfo(Event $event): void
     {
-        if (!$this->isEnabled() || ($event['plugin'] ?? '') !== 'grav-javabean-admin2') {
+        $plugin = (string) ($event['plugin'] ?? '');
+        if (!$this->isEnabled() || !in_array($plugin, [JavaBeanLegacy::SLUG, JavaBeanLegacy::LEGACY_SLUG], true)) {
             return;
         }
 
@@ -121,11 +124,11 @@ class GravJavabeanAdmin2Plugin extends Plugin
 
         $event['definition'] = [
             'id' => 'javabean-admin2',
-            'plugin' => 'grav-javabean-admin2',
+            'plugin' => 'javabean-admin2',
             'title' => 'JavaBean Themes',
             'icon' => 'fa-mug-hot',
             'page_type' => 'blueprint',
-            'blueprint' => 'grav-javabean-admin2',
+            'blueprint' => 'javabean-admin2',
             'data_endpoint' => '/javabean/settings',
             'save_endpoint' => '/javabean/settings',
             'actions' => [
@@ -148,7 +151,7 @@ class GravJavabeanAdmin2Plugin extends Plugin
         $panels = $event['panels'] ?? [];
         $panels[] = [
             'id' => 'javabean-admin2',
-            'plugin' => 'grav-javabean-admin2',
+            'plugin' => 'javabean-admin2',
             'label' => 'JavaBean Themes',
             'description' => 'Admin2 cockpit paint — preset cards, light/dark pairs',
             'icon' => 'fa-mug-hot',
@@ -167,11 +170,12 @@ class GravJavabeanAdmin2Plugin extends Plugin
 
     private function isEnabled(): bool
     {
-        return (bool) $this->grav['config']->get('plugins.grav-javabean-admin2.enabled', false);
+        return JavaBeanLegacy::isEnabled($this->grav);
     }
 
     private function loadClasses(): void
     {
+        require_once __DIR__ . '/classes/JavaBeanLegacy.php';
         require_once __DIR__ . '/classes/JavaBeanFontCatalog.php';
         require_once __DIR__ . '/classes/JavaBeanPresetRegistry.php';
         require_once __DIR__ . '/classes/JavaBeanThemeEngine.php';

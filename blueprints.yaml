@@ -1,7 +1,7 @@
 name: JavaBean for Admin2
-slug: grav-javabean-admin2
+slug: javabean-admin2
 type: plugin
-version: 1.0.1
+version: 1.1.0
 description: Free Admin2 theme presets — twelve cockpits, light/dark pairs, Andy switcher compatible.
 icon: mug-hot
 author:
@@ -9,7 +9,7 @@ author:
   email: chief@gravmud.site
   url: https://gravmud.site
 homepage: https://javabean.gravmud.site
-bugs: https://github.com/GravMUD/grav-plugin-grav-javabean-admin2/issues
+bugs: https://github.com/GravMUD/grav-plugin-javabean-admin2/issues
 docs: https://javabean.gravmud.site
 keywords: grav, admin2, admin-next, theme, javabean, presets
 license: MIT
