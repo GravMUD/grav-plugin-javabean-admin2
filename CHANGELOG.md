@@ -1,3 +1,9 @@
+# v1.1.2
+## 06/04/2026
+
+1. [](#bugfix)
+    * **Fix:** Grav 2 plugin bootstrap — `return new GravJavabeanAdmin2Plugin($name, $grav)` so Andy slug `javabean-admin2` loads (fixes “enabled but not found” / missing Admin2 sidebar)
+
 # v1.1.1
 ## 06/02/2026
 

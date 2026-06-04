@@ -189,3 +189,5 @@ class GravJavabeanAdmin2Plugin extends Plugin
         return class_exists(\Grav\Plugin\Api\ApiRouteCollector::class);
     }
 }
+
+return new GravJavabeanAdmin2Plugin($name, $grav);
