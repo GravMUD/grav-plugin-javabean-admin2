@@ -1,3 +1,9 @@
+# v1.1.1
+## 06/02/2026
+
+1. [](#improved)
+    * GetGRAV! menubar link points to **https://gravfans.live** (was getgrav.live)
+
 # v1.1.0
 ## 06/01/2026
 

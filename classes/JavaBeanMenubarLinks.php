@@ -23,7 +23,7 @@ class JavaBeanMenubarLinks
             ],
             [
                 'label' => 'GetGRAV!',
-                'url' => 'https://getgrav.live',
+                'url' => 'https://gravfans.live',
                 'icon' => 'fa-rocket',
                 'external' => true,
             ],
