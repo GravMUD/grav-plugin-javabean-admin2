@@ -10,7 +10,7 @@ use Grav\Plugin\JavaBeanAdmin2\JavaBeanMenubarLinks;
 use Grav\Plugin\JavaBeanAdmin2\JavaBeanThemeEngine;
 use RocketTheme\Toolbox\Event\Event;
 
-class GravJavabeanAdmin2Plugin extends Plugin
+class JavabeanAdmin2Plugin extends Plugin
 {
     private ?JavaBeanThemeEngine $engine = null;
 
@@ -89,7 +89,7 @@ class GravJavabeanAdmin2Plugin extends Plugin
 
     public function onApiSidebarItems(Event $event): void
     {
-        if (!$this->isEnabled()) {
+        if (!$this->isEnabled() || !is_dir(GRAV_ROOT . '/user/plugins/javabean-admin2')) {
             return;
         }
 
@@ -129,8 +129,8 @@ class GravJavabeanAdmin2Plugin extends Plugin
             'icon' => 'fa-mug-hot',
             'page_type' => 'blueprint',
             'blueprint' => 'javabean-admin2',
-            'data_endpoint' => '/javabean/settings',
-            'save_endpoint' => '/javabean/settings',
+            'data_endpoint' => '/config/plugins/javabean-admin2',
+            'save_endpoint' => '/config/plugins/javabean-admin2',
             'actions' => [
                 ['id' => 'save', 'label' => 'Save', 'icon' => 'fa-check', 'primary' => true],
             ],
@@ -156,8 +156,8 @@ class GravJavabeanAdmin2Plugin extends Plugin
             'description' => 'Admin2 cockpit paint — preset cards, light/dark pairs',
             'icon' => 'fa-mug-hot',
             'blueprint' => 'javabean-settings',
-            'data_endpoint' => '/javabean/settings',
-            'save_endpoint' => '/javabean/settings',
+            'data_endpoint' => '/config/plugins/javabean-admin2',
+            'save_endpoint' => '/config/plugins/javabean-admin2',
             'priority' => 15,
         ];
         $event['panels'] = $panels;
@@ -189,5 +189,3 @@ class GravJavabeanAdmin2Plugin extends Plugin
         return class_exists(\Grav\Plugin\Api\ApiRouteCollector::class);
     }
 }
-
-return new GravJavabeanAdmin2Plugin($name, $grav);

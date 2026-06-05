@@ -52,11 +52,15 @@ class JavaBeanMenubarLinks
             return [];
         }
 
+        $adminDir = GRAV_ROOT . '/user/plugins/grav-mud-admin';
         $items = [];
         foreach (self::defaultLinks() as $index => $link) {
             $url = trim((string) ($link['url'] ?? ''));
             $label = trim((string) ($link['label'] ?? ''));
             if ($url === '' || $label === '') {
+                continue;
+            }
+            if ($label === 'MUD Editor' && !is_dir($adminDir)) {
                 continue;
             }
 

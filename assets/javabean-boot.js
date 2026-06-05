@@ -194,17 +194,28 @@
 
   async function loadThemeCss(preset) {
     const { url } = apiBase();
-    let fetchUrl = `${url}/javabean/theme.css`;
-    if (preset) {
-      fetchUrl += `?preset=${encodeURIComponent(preset)}`;
+    const paths = ['/javabean/theme.css', '/mud-admin/javabean/theme.css'];
+    let lastErr = null;
+
+    for (const path of paths) {
+      let fetchUrl = `${url}${path}`;
+      if (preset) {
+        fetchUrl += `?preset=${encodeURIComponent(preset)}`;
+      }
+
+      try {
+        const res = await fetch(fetchUrl, {
+          credentials: 'include',
+          headers: authHeaders(),
+        });
+        if (!res.ok) throw new Error(`theme.css HTTP ${res.status}`);
+        return res.text();
+      } catch (err) {
+        lastErr = err;
+      }
     }
 
-    const res = await fetch(fetchUrl, {
-      credentials: 'include',
-      headers: authHeaders(),
-    });
-    if (!res.ok) throw new Error(`theme.css HTTP ${res.status}`);
-    return res.text();
+    throw lastErr || new Error('theme.css unavailable');
   }
 
   async function applyThemeCss(css) {
