@@ -26,7 +26,7 @@ class JavabeanAdmin2Plugin extends Plugin
             $events['onApiAdminSettingsPanels'] = ['onApiAdminSettingsPanels', 0];
             $events['onApiSidebarItems'] = ['onApiSidebarItems', 0];
             $events['onApiPluginPageInfo'] = ['onApiPluginPageInfo', 0];
-            $events['onApiMenubarItems'] = ['onApiMenubarItems', 0];
+            $events['onApiAdminPreferencesResolved'] = ['onApiAdminPreferencesResolved', 0];
         }
 
         return $events;
@@ -42,22 +42,30 @@ class JavabeanAdmin2Plugin extends Plugin
         JavaBeanLegacy::maybeMigrate($this->grav);
     }
 
-    public function onApiMenubarItems(Event $event): void
+    public function onApiAdminPreferencesResolved(Event $event): void
     {
-        if (!$this->isEnabled()) {
+        if (!$this->isEnabled() || $this->operatorDockOwnsMenubarLinks()) {
             return;
         }
 
-        $user = $event['user'] ?? null;
-        if (!$user || !($user->get('access.api.access') || $user->get('access.api.super'))) {
+        $this->loadClasses();
+        $payload = $event['payload'] ?? [];
+        if (!is_array($payload)) {
             return;
         }
 
-        $items = $event['items'] ?? [];
-        foreach ((new JavaBeanMenubarLinks())->apiItems($this->grav) as $item) {
-            $items[] = $item;
+        $event['payload'] = JavaBeanMenubarLinks::mergeIntoPayload($payload, $this->grav);
+    }
+
+    private function operatorDockOwnsMenubarLinks(): bool
+    {
+        if (!is_dir(GRAV_ROOT . '/user/plugins/operator-dock-admin2')) {
+            return false;
         }
-        $event['items'] = $items;
+
+        $cfg = (array) $this->grav['config']->get('plugins.operator-dock-admin2', []);
+
+        return !empty($cfg['enabled']);
     }
 
     public function onPagesInitializedEarly(): void

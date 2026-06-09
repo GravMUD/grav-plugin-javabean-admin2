@@ -1,3 +1,11 @@
+# v1.1.3
+## 06/05/2026
+
+1. [](#improved)
+    * **Menubar:** URL shortcuts merge at runtime via `onApiAdminPreferencesResolved` (anchor links) — fixes `javabean-admin2/undefined` toast from action-only menubar API
+    * **Menubar:** No writes to `user/config/admin-next.yaml` (good Grav citizen)
+    * **Menubar:** Mambo Desktop shortcut included when Operator Dock is not installed
+
 # v1.1.2
 ## 06/04/2026
 
