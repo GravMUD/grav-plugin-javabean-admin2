@@ -1,3 +1,10 @@
+# v1.1.4
+## 06/25/2026
+
+1. [](#improved)
+    * **UI:** Remove promo section header from JavaBean settings page
+    * **UI:** Fix preset card preview text colour on dark Admin2 themes
+
 # v1.1.3
 ## 06/05/2026
 
@@ -28,28 +35,14 @@
     * Remove old `user/plugins/grav-javabean-admin2` folder after upgrade; run `bin/grav cache`
 
 # v1.0.1
-## 06/01/2026
+## 05/31/2026
 
 1. [](#improved)
-    * Team DC header icons register at runtime via `onApiMenubarItems` — no longer writes `user/config/admin-next.yaml`
-    * `inject_menubar_links` defaults to off (opt-in)
+    * **Menubar:** Team DC header shortcuts (MUD Editor, GetGRAV!, Mud Bazaar) via `onApiMenubarItems`
+    * **Menubar:** Opt-in toggle `inject_menubar_links` (default off for GPM)
 
 # v1.0.0
 ## 05/30/2026
 
 1. [](#new)
-    * Public 1.0 launch — JavaBean for Admin2
-    * Site and docs at https://javabean.gravmud.site
-    * Twelve presets, Paint Shop, fourteen-font catalog, Andy appearance sync
-
-# v0.1.0
-## 05/30/2026
-
-1. [](#new)
-    * Initial public release — JavaBean for Admin2
-    * Twelve free theme presets with paired light and dark token maps
-    * Live preset card picker with mini-preview cockpit cards
-    * Paint Shop advanced styling — accent, density, typography, corners, custom CSS
-    * Fourteen-font catalog (sans, serif, mono) with Google Fonts loading
-    * Andy Admin2 appearance sync — light/dark/system, accent HSV, font picker compatibility
-    * REST API endpoints for presets, fonts, settings, and theme.css preview
+    * Initial release — twelve Admin2 theme presets, paint shop, JavaBean boot CSS

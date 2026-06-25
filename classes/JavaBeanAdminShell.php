@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Grav\Plugin\JavaBeanAdmin2;
 
 use Grav\Common\Grav;
+use RocketTheme\Toolbox\Event\Event;
 
 /**
  * Serves Admin2 SPA shell with JavaBean CSS + boot script injected.
@@ -93,6 +94,11 @@ HTML;
     <link rel="stylesheet" href="{$pluginBase}/javabean-admin.css">
 HTML;
 
+        $extraHead = $this->collectAdmin2SpaShellHead();
+        if ($extraHead !== '') {
+            $inject .= "\n    " . $extraHead;
+        }
+
         $html = str_replace('<head>', "<head>\n    " . $inject, $html);
 
         header('Content-Type: text/html; charset=UTF-8');
@@ -137,6 +143,15 @@ HTML;
         }
 
         return true;
+    }
+
+    /** Plugins (e.g. grav-mud-messenger) append via onAdmin2SpaShellHead — JavaBean does not own them. */
+    private function collectAdmin2SpaShellHead(): string
+    {
+        $headEvent = new Event(['html' => '']);
+        $this->grav->fireEvent('onAdmin2SpaShellHead', $headEvent);
+
+        return (string) ($headEvent['html'] ?? '');
     }
 
     /** @param array<string, mixed> $cfg */

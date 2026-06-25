@@ -2,10 +2,6 @@ title: JavaBean Themes
 form:
   validation: loose
   fields:
-    header_note:
-      type: section
-      title: Team DC cockpit paint
-      text: 'Free Admin2 theming by FutureVision Labs. Twelve presets, Andy light/dark compatible. More at gravmud.site / Mud Bazaar.'
     tabs:
       type: tabs
       fields:

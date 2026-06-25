@@ -288,6 +288,8 @@
 
             background: var(--card, #18181b);
 
+            color: var(--foreground, #e4e4e7);
+
             text-align: left;
 
           }
@@ -344,6 +346,8 @@
 
             line-height: 1.2;
 
+            color: inherit;
+
           }
 
           .accent {
@@ -364,6 +368,8 @@
 
             opacity: 0.88;
 
+            color: inherit;
+
           }
 
           .name {
@@ -373,6 +379,8 @@
             font-weight: 700;
 
             line-height: 1.2;
+
+            color: var(--foreground, #e4e4e7);
 
           }
 
@@ -450,11 +458,11 @@
 
           <div class="preview" style="background:${bg};color:${fg}">
 
-            <div class="title-line">Page Title</div>
+            <div class="title-line" style="color:${fg}">Page Title</div>
 
             <span class="accent" style="background:${primary}"></span>
 
-            <div class="font-row" style="font-family:${preset.fontStack || 'inherit'}">
+            <div class="font-row" style="font-family:${preset.fontStack || 'inherit'};color:${fg}">
 
               Aa ${fontLabel(preset)}
 

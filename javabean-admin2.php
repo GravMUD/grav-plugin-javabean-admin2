@@ -34,6 +34,8 @@ class JavabeanAdmin2Plugin extends Plugin
 
     public function onPluginsInitializedEarly(): void
     {
+        $this->ensureLegacyLoaded();
+
         if (!self::supportsGravApiBridge()) {
             return;
         }
@@ -178,12 +180,19 @@ class JavabeanAdmin2Plugin extends Plugin
 
     private function isEnabled(): bool
     {
+        $this->ensureLegacyLoaded();
+
         return JavaBeanLegacy::isEnabled($this->grav);
+    }
+
+    private function ensureLegacyLoaded(): void
+    {
+        require_once __DIR__ . '/classes/JavaBeanLegacy.php';
     }
 
     private function loadClasses(): void
     {
-        require_once __DIR__ . '/classes/JavaBeanLegacy.php';
+        $this->ensureLegacyLoaded();
         require_once __DIR__ . '/classes/JavaBeanFontCatalog.php';
         require_once __DIR__ . '/classes/JavaBeanPresetRegistry.php';
         require_once __DIR__ . '/classes/JavaBeanThemeEngine.php';
